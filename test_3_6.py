@@ -27,11 +27,11 @@ def browser():
 def test_answer_aliens(browser, links):
     link = f"{links}/"
     browser.get(link)
-    time.sleep(3)
+    browser.implicitly_wait(10)
     textarea = browser.find_element(By.CSS_SELECTOR, ".textarea")
     textarea.send_keys(str(math.log(int(time.time()))))
     print(str(math.log(int(time.time()))))
-    time.sleep(1)
+    browser.implicitly_wait(10)
 
     button = WebDriverWait(browser, 5).until(
         EC.element_to_be_clickable((By.XPATH, "//button[@class='submit-submission']")))
@@ -41,4 +41,3 @@ def test_answer_aliens(browser, links):
         EC.visibility_of_element_located((By.CSS_SELECTOR, ".smart-hints__hint"))).text
 
     assert element_text == "Correct!"
-    time.sleep(1)
